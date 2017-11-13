@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>HOTH 3 Workshop: Canvas Game</title>
+</head>
+<body>
+<script>
+var canvas;
+var canvasContext;
+var ballX = 50;
+var ballY = 50;
+var ballRadius = 10;
+var score = 0;
+
+
+/*********************************************
+ * code we will modify is below:
+ *********************************************/
+ /**
+  * change speeds!
+  */
+var ballSpeedX = 20;
+var ballSpeedY = 4;
+var opponentMaxSpeed = 6;
+var frameRate = 50;
+  
+window.onload = function() {
+  
+  var color= ["white", "white","white","white"];
+  canvas = document.querySelector('#gameCanvas');
+  canvasContext = canvas.getContext('2d');
+  
+    canvasContext.fillStyle = 'black';
+  canvasContext.fillRect(0,0, canvas.width, canvas.height);
+
+  
+  // TOOD 2: call drawFrame() in an interval according to frameRate
+  drawFrame();
+  // TODO 5: update paddle1 according to player mouse movement
+  
+  function changetored(event){
+    
+    var mousePos=getMousePos(event);
+    if (mousePos.x > 50  && mousePos.x < 100 && mousePos.y > 50 && mousePos.y < 100){
+      drawRect(50, 50, 50, 50, 'red');
+      color[0]="red";
+      if (color[0]=='red' && color[1]=='red' && color[2]=='red' && color[3]=='red'){
+    wingame();
+    setTimeout(startgame, 1000);
+  }
+      setTimeout(changetoblack1, 2000 - (score * 50));
+    }
+
+    if (mousePos.x > 125  && mousePos.x < 175 && mousePos.y > 50 && mousePos.y < 100){
+      drawRect(125, 50, 50, 50, 'red');
+      color[1]="red";
+      if (color[0]=='red' && color[1]=='red' && color[2]=='red' && color[3]=='red'){
+    wingame();
+    setTimeout(startgame, 1000);
+  }
+      setTimeout(changetoblack2, 2000 - (score * 50));
+
+    }
+    if (mousePos.x > 200  && mousePos.x < 250 && mousePos.y > 50 && mousePos.y < 100){
+      drawRect(200, 50, 50, 50, 'red');
+      color[2]="red";
+      if (color[0]=='red' && color[1]=='red' && color[2]=='red' && color[3]=='red'){
+    wingame();
+    setTimeout(startgame, 1000);
+  }
+      setTimeout(changetoblack3, 2000 - (score * 50));
+    }
+    if (mousePos.x > 275  && mousePos.x < 325 && mousePos.y > 50 && mousePos.y < 100){
+      drawRect(275, 50, 50, 50, 'red');
+      color[3]="red";
+      if (color[0]=='red' && color[1]=='red' && color[2]=='red' && color[3]=='red'){
+    wingame();
+    setTimeout(startgame, 1000);
+  }
+      setTimeout(changetoblack4, 2000 - (score * 50));
+    }
+  }
+  
+    canvas.addEventListener('click', changetored);
+  
+    function changetoblack1(){
+      drawRect(50, 50, 50, 50, 'black');
+      color[0]="black";
+      if (color[0]=='black' && color[1]=='black' && color[2]=='black' && color[3]=='black'){
+    endgame();
+  }
+    }
+    function changetoblack2(){
+      drawRect(125, 50, 50, 50, 'black');
+      color[1]="black";
+      if (color[0]=='black' && color[1]=='black' && color[2]=='black' && color[3]=='black'){
+    endgame();
+  }
+    }
+    function changetoblack3(){
+      drawRect(200, 50, 50, 50, 'black');
+      color[2]="black";
+      if (color[0]=='black' && color[1]=='black' && color[2]=='black' && color[3]=='black'){
+    endgame();
+  }
+    }
+    function changetoblack4(){
+      drawRect(275, 50, 50, 50, 'black');
+      color[3]="black";
+      if (color[0]=='black' && color[1]=='black' && color[2]=='black' && color[3]=='black'){
+    endgame();
+  }
+    }
+    drawRect(50, 50, 50, 50, 'white');
+     drawRect(125, 50, 50, 50, 'white');
+      drawRect(200, 50, 50, 50, 'white');
+      drawRect(275, 50, 50, 50, 'white');
+
+      drawRect(50, 125, 50, 200, 'white');
+     drawRect(125, 125, 50, 200, 'white');
+      drawRect(200, 125, 50, 200, 'white');
+      drawRect(275, 125, 50, 200, 'white');
+    
+    
+    // setTimeout(changetoblue, 5000);
+    // setTimeout(changetogreen, 10000);
+  
+  
+}
+
+function check(){
+  if (color[0]=='black' && color[1]=='black' && color[2]=='black' && color[3]=='black'){
+    endgame();
+  }
+}
+
+
+
+function endgame(){
+  //something
+        drawRect(50, 125, 50, 200, 'black');
+     drawRect(125, 125, 50, 200, 'black');
+      drawRect(200, 125, 50, 200, 'black');
+      drawRect(275, 125, 50, 200, 'black');
+      score = 0;
+
+      messagecover();
+     canvasContext.font = "30px Comic Sans";
+      canvasContext.fillStyle = "red";
+      canvasContext.fillText("You lose.", 50,400);
+      printScore();
+}
+
+function wingame()
+{
+drawRect(50, 50, 50, 50, 'blue');
+     drawRect(125, 50, 50, 50, 'blue');
+      drawRect(200, 50, 50, 50, 'blue');
+      drawRect(275, 50, 50, 50, 'blue');
+
+      drawRect(50, 125, 50, 200, 'blue');
+     drawRect(125, 125, 50, 200, 'blue');
+      drawRect(200, 125, 50, 200, 'blue');
+      drawRect(275, 125, 50, 200, 'blue');
+      score++;
+      messagecover();
+      canvasContext.font = "30px Comic Sans";
+      canvasContext.fillStyle = "red";
+      canvasContext.fillText("You can't win forever. All must lose in the end.", 50,400);
+      printScore();
+
+}
+
+function messagecover()
+{
+  drawRect(50, 350, canvas.width, 200, "black");
+
+}
+
+function printScore(){
+
+      drawRect(400, 100, 150, 150, "black");
+      canvasContext.font = "30px Comic Sans";
+      canvasContext.fillStyle = "red";
+      canvasContext.fillText("Score:", 400, 125);
+      canvasContext.fillText(score, 500, 125);
+      
+}
+function startgame()
+{
+    drawRect(50, 50, 50, 50, 'white');
+     drawRect(125, 50, 50, 50, 'white');
+      drawRect(200, 50, 50, 50, 'white');
+      drawRect(275, 50, 50, 50, 'white');
+
+      drawRect(50, 125, 50, 200, 'white');
+     drawRect(125, 125, 50, 200, 'white');
+      drawRect(200, 125, 50, 200, 'white');
+      drawRect(275, 125, 50, 200, 'white');
+      
+
+}
+
+  
+function drawFrame() {
+  drawObjects();
+}
+
+function drawObjects() {
+    drawRect(50, 50, 50, 50, 'white');
+}
+  
+  
+  
+/*********************************************
+ * provided functions, do not modify!
+ *********************************************/
+function drawRect(leftX, topY, width, height, drawColor) {
+  canvasContext.fillStyle = drawColor;
+  canvasContext.fillRect(leftX, topY, width, height);
+}
+function getMousePos(evt) {
+  var rect = canvas.getBoundingClientRect();
+  var root = document.documentElement;
+  var mouseX = evt.clientX - rect.left - root.scrollLeft;
+  var mouseY = evt.clientY - rect.top - root.scrollTop;
+  return {
+    x: mouseX,
+    y: mouseY
+  };
+}
+
+
+</script>
+
+<canvas id="gameCanvas" width="800" height="600"></canvas>
+
+</body>
+</html>
